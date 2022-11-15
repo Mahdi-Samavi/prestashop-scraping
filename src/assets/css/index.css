@@ -1,3 +1,43 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: "Lexend";
+        src: url('../fonts/lexend/Lexend.ttf') format('truetype');
+    }
+
+    html {
+        @apply font-lexend;
+        -webkit-user-select: none;
+    }
+
+    header {
+        @apply flex flex-row-reverse justify-between gap-6 bg-slate-100 border-b draggable [&>*]:non-draggable;
+    }
+}
+
+@layer components {
+    #root {
+        @apply w-screen h-screen overflow-hidden rounded-sm bg-lavender-mist;
+    }
+
+    .window-control-button {
+        @apply px-4 py-3 transition hover:bg-cadet-blue;
+    }
+
+    .user-nav:hover i {
+        @apply bg-cadet-blue;
+    }
+}
+
+@layer utilities {
+    .draggable {
+        -webkit-app-region: drag;
+    }
+
+    .non-draggable {
+        -webkit-app-region: no-drag;
+    }
+}
