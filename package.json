@@ -4,20 +4,22 @@
   "private": true,
   "main": "public/electron.js",
   "dependencies": {
+    "@iconscout/react-unicons": "^1.1.6",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
+    "cross-env": "^7.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cross-env BROWSER=none react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "concurrently -k \"yarn start\" \"set DEV=true & yarn electron\"",
+    "dev": "concurrently -k \"yarn start\" \"cross-env DEV=true yarn electron\"",
     "electron": "wait-on http://localhost:3000 & electron ."
   },
   "eslintConfig": {
