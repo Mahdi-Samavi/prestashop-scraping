@@ -1,6 +1,8 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, Tray, Menu } = require("electron");
 const path = require("path");
+
+let tray = null;
 
 function createWindow() {
   // Create the browser window.
@@ -15,7 +17,6 @@ function createWindow() {
     },
   });
 
-  // and load the index.html of the app.
   mainWindow.loadURL(
     process.env.DEV
       ? "http://localhost:3000"
@@ -25,10 +26,20 @@ function createWindow() {
   // Open the DevTools.
   process.env.DEV && mainWindow.webContents.openDevTools();
 
-  ipcMain.on("close-app", () => mainWindow.close());
+  ipcMain.on("close-app", () => mainWindow.hide());
   ipcMain.on("minimize-app", () => mainWindow.minimize());
   ipcMain.on("maximize-app", () => {
     mainWindow.isMaximized() ? mainWindow.unmaximize() : mainWindow.maximize();
+  });
+
+  ipcMain.on("about:open", () => {});
+
+  const contextMenu = Menu.buildFromTemplate([
+    { label: "Exit", type: "normal", role: "quit" },
+  ]);
+  tray.setContextMenu(contextMenu);
+  tray.on("click", () => {
+    mainWindow.isVisible() ? mainWindow.hide() : mainWindow.show();
   });
 }
 
@@ -36,6 +47,9 @@ function createWindow() {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+  tray = new Tray(path.join(__dirname, "favicon.ico"));
+  tray.setToolTip("Prestashop Scraping");
+
   createWindow();
 
   app.on("activate", function () {
@@ -54,3 +68,4 @@ app.on("window-all-closed", function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+require("./events.js");
