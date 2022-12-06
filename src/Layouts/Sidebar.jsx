@@ -1,4 +1,5 @@
-import { Navigation, Link } from "../Components";
+import { Navigation } from ".";
+import { NavLink } from "../Components";
 import { UilSetting, UilInfoCircle } from "@iconscout/react-unicons";
 
 export default function Sidebar() {
@@ -11,10 +12,10 @@ export default function Sidebar() {
         <Navigation />
       </div>
       <div className="flex flex-col gap-y-2">
-        <Link to="/settings">
+        <NavLink to="/settings">
           <UilSetting size={22} />
           Settings
-        </Link>
+        </NavLink>
 
         <button
           className="flex items-center px-4 py-2 text-sm transition bg-gray-200 gap-x-3 rounded-xl bg-opacity-30 hover:bg-gray-300 focus:bg-gray-300"

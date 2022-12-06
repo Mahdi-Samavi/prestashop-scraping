@@ -1,5 +1,6 @@
 import sys
 import json
+from Controllers.LogController import LogController
 
 if __name__ == '__main__':
     controller, action = sys.argv[1].split('@', 2)
@@ -10,4 +11,7 @@ if __name__ == '__main__':
     )
     method = getattr(controller(), action)
 
-    method(*json.loads(sys.argv[2])) if len(sys.argv) > 2 else method()
+    try:
+        method(*json.loads(sys.argv[2])) if len(sys.argv) > 2 else method()
+    except BaseException as error:
+        LogController().error(error)

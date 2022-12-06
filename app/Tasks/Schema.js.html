@@ -1,0 +1,59 @@
+<script>
+    const { ipcRenderer } = require("electron");
+    const { PythonShell } = require("python-shell");
+    const path = require("path");
+
+    const pyshell = (action, args) => {
+        return new PythonShell(path.join(__dirname, "../index.py"), {
+            args: [action].concat(JSON.stringify(args))
+        });
+    };
+
+    ipcRenderer.on("index", (event, args) => {
+        let shell = pyshell("SchemaController@index", args);
+
+        shell.on("message", (result) => {
+            event.sender.send("schema:index", JSON.parse(result));
+        });
+    });
+
+    ipcRenderer.on("create", (event, args) => {
+        let shell = pyshell("SchemaController@create", args);
+
+        shell.on("message", (result) => {
+            event.sender.send("schema:create", JSON.parse(result));
+        });
+    });
+
+    ipcRenderer.on("add", (event, args) => {
+        let shell = pyshell("SchemaController@add", args);
+
+        shell.on("message", (result) => {
+            event.sender.send("schema:add", JSON.parse(result));
+        });
+    });
+
+    ipcRenderer.on("get", (event, args) => {
+        let shell = pyshell("SchemaController@get", args);
+
+        shell.on("message", (result) => {
+            event.sender.send("schema:get", JSON.parse(result));
+        });
+    });
+
+    ipcRenderer.on("edit", (event, args) => {
+        let shell = pyshell("SchemaController@edit", args);
+
+        shell.on("message", (result) => {
+            event.sender.send("schema:edit", JSON.parse(result));
+        });
+    });
+
+    ipcRenderer.on("destroy", (event, args) => {
+        let shell = pyshell("SchemaController@destroy", args);
+
+        shell.on("message", (result) => {
+            event.sender.send("schema:destroy", JSON.parse(result));
+        });
+    });
+</script>

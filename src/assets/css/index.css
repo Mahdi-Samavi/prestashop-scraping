@@ -36,7 +36,7 @@
     }
 
     .window-control-button {
-        @apply px-4 py-3 transition hover:bg-gray-300 focus:bg-gray-300;
+        @apply px-4 py-3 transition hover:bg-gray-300;
     }
 
     .user-nav:hover i,
@@ -61,8 +61,20 @@
         @apply -mr-3
     }
 
-    .text-input {
+    .text-input, .select-input {
         @apply block w-full p-3 text-sm text-gray-800 transition border rounded-lg shadow-sm bg-gray-50 ring-gray-300 focus:ring focus:border-gray-300;
+    }
+
+    .desc-input {
+        @apply mt-1 text-xs text-gray-400;
+    }
+
+    .checkbox-input {
+        @apply w-4 h-4 transition border rounded bg-gray-50 ring-gray-300 accent-gray-600 focus:ring focus:border-gray-300;
+    }
+
+    .divider {
+        @apply block h-px bg-[#e5e7eb] mb-6;
     }
 }
 
