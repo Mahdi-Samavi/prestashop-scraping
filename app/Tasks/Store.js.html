@@ -3,14 +3,14 @@
     const { PythonShell } = require("python-shell");
     const path = require("path");
 
-    const pyshell = (action, alias, args) => {
+    const pyshell = (action, args) => {
         return new PythonShell(path.join(__dirname, "../index.py"), {
             args: [action].concat(JSON.stringify(args))
         });
     };
 
     ipcRenderer.on("index", (event, args) => {
-        let shell = pyshell("StoreController@index", "store:index", args);
+        let shell = pyshell("StoreController@index", args);
 
         shell.on("message", (result) => {
             event.sender.send("store:index", JSON.parse(result));
@@ -18,7 +18,7 @@
     });
 
     ipcRenderer.on("add", (event, args) => {
-        let shell = pyshell("StoreController@add", "store:add", args);
+        let shell = pyshell("StoreController@add", args);
 
         shell.on("message", (result) => {
             event.sender.send("store:add", JSON.parse(result));
@@ -26,7 +26,7 @@
     });
 
     ipcRenderer.on("get", (event, args) => {
-        let shell = pyshell("StoreController@get", "store:get", args);
+        let shell = pyshell("StoreController@get", args);
 
         shell.on("message", (result) => {
             event.sender.send("store:get", JSON.parse(result));
@@ -34,7 +34,7 @@
     });
 
     ipcRenderer.on("edit", (event, args) => {
-        let shell = pyshell("StoreController@edit", "store:edit", args);
+        let shell = pyshell("StoreController@edit", args);
 
         shell.on("message", (result) => {
             event.sender.send("store:edit", JSON.parse(result));
@@ -42,7 +42,7 @@
     });
 
     ipcRenderer.on("destroy", (event, args) => {
-        let shell = pyshell("StoreController@destroy", "store:destroy", args);
+        let shell = pyshell("StoreController@destroy", args);
 
         shell.on("message", (result) => {
             event.sender.send("store:destroy", JSON.parse(result));
