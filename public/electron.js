@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain, Tray, Menu } = require("electron");
+const { app, BrowserWindow, ipcMain, Tray } = require("electron");
 const path = require("path");
 
 let tray = null;
@@ -34,10 +34,6 @@ function createWindow() {
 
   ipcMain.on("about:open", () => {});
 
-  const contextMenu = Menu.buildFromTemplate([
-    { label: "Exit", type: "normal", role: "quit" },
-  ]);
-  tray.setContextMenu(contextMenu);
   tray.on("click", () => {
     mainWindow.isVisible() ? mainWindow.hide() : mainWindow.show();
   });
