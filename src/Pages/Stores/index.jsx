@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
-import { UilPlus, UilPen, UilTrashAlt } from "@iconscout/react-unicons";
+import {
+  UilPlus,
+  UilPen,
+  UilTrashAlt,
+  UilCheck,
+  UilTimes,
+} from "@iconscout/react-unicons";
 import { Breadcrumbs, Card, Link, Table, Tooltip } from "../../Components";
 
 export default function Index() {
@@ -48,6 +54,7 @@ export default function Index() {
             header={[
               "Store",
               "Admin URL",
+              "Version",
               "Email",
               "Added At",
               "Edited At",
@@ -60,10 +67,17 @@ export default function Index() {
                 <Table.Row key={store.id}>
                   <Table.Th>{store.name}</Table.Th>
                   <Table.Td>{store.admin_url}</Table.Td>
+                  <Table.Td>{store.version ?? "--"}</Table.Td>
                   <Table.Td>{store.email}</Table.Td>
                   <Table.Td>{store.created_at}</Table.Td>
                   <Table.Td>{store.updated_at}</Table.Td>
-                  <Table.Td>{store.status}</Table.Td>
+                  <Table.Td>
+                    {store.status ? (
+                      <UilCheck className="inline" size={28} color="#23C300" />
+                    ) : (
+                      <UilTimes className="inline" size={28} color="#FF3232" />
+                    )}
+                  </Table.Td>
                   <Table.Td className="flex justify-between flex-nowrap xl:justify-evenly">
                     <Link
                       to={"/stores/edit/" + store.id}

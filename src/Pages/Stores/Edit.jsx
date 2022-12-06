@@ -17,9 +17,8 @@ export default function Edit() {
 
   useEffect(() => {
     window.electron.invoke("store:get", id).then((result) => {
-      setStore(result.data);
-
       window.electron.send("close", "store:get");
+      setStore(result.data);
     });
   }, []);
 

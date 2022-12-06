@@ -1,13 +1,14 @@
+import { useNavigate } from "react-router-dom";
 import { UilSave, UilFlask } from "@iconscout/react-unicons";
 import {
   Breadcrumbs,
   Button,
   Card,
+  DescInput,
   Label,
   Switch,
   TextInput,
 } from "../../Components";
-import { useNavigate } from "react-router-dom";
 
 export default function Add() {
   const navigate = useNavigate();
@@ -44,7 +45,14 @@ export default function Add() {
             </div>
             <div className="mb-6">
               <Label htmlFor="admin-url">Admin URL</Label>
-              <TextInput type="text" name="admin_url" id="admin-url" required />
+              <TextInput
+                type="text"
+                name="admin_url"
+                id="admin-url"
+                placeholder="https://example.com/admin"
+                required
+              />
+              <DescInput>Must start with http:// or https://</DescInput>
             </div>
             <div className="mb-6">
               <Label htmlFor="email">Email</Label>
