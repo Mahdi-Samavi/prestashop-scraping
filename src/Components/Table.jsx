@@ -3,7 +3,7 @@
 function Table({ header, children }) {
   return (
     <div className="overflow-x-auto shadow-sm rounded-xl ">
-      <table className="w-full text-sm text-left">
+      <table className="w-full text-sm text-center whitespace-nowrap">
         <thead className="text-xs uppercase bg-slate-50">
           <tr>
             {header.map((item) => (
@@ -22,8 +22,7 @@ function Table({ header, children }) {
 Table.Row = ({ children, className = "" }) => (
   <tr
     className={
-      "bg-slate-50 border-b whitespace-nowrap hover:bg-gray-300 hover:bg-opacity-30 " +
-      className
+      "bg-slate-50 border-b hover:bg-gray-300 hover:bg-opacity-30 " + className
     }
   >
     {children}

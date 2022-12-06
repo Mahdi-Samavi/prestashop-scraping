@@ -11,16 +11,19 @@ function Card(props) {
 
   return (
     <div className="bg-slate-100 rounded-xl">
-      <div
-        className={
-          (_actions != undefined ? "flex justify-between items-center " : "") +
-          "px-4 py-2 border-b text-sm"
-        }
-      >
-        {props.title && <span>{props.title}</span>}
+      {(props.title || _actions) && (
+        <div
+          className={
+            (_actions != undefined
+              ? "flex justify-between items-center "
+              : "") + "px-4 py-2 border-b text-sm"
+          }
+        >
+          {props.title && <span>{props.title}</span>}
 
-        {_actions}
-      </div>
+          {_actions}
+        </div>
+      )}
 
       {_body}
     </div>
