@@ -1,3 +1,4 @@
+from os import path, environ
 from sqlalchemy import create_engine, event, Column, ForeignKey, Integer, Float, Enum, String, Boolean, DateTime
 from sqlalchemy.orm import declarative_base, relationship
 from sqlalchemy.types import TypeDecorator
@@ -14,8 +15,10 @@ INITIAL_DATA = {
     ],
 }
 
+DATABASE = path.join(environ['APPDATA'],
+                     'prestashop-scraping', 'Database', 'database')
 
-engine = create_engine("sqlite:///database.sqlite", echo=False, future=True)
+engine = create_engine('sqlite:///' + DATABASE, echo=False, future=True)
 Base = declarative_base()
 
 
@@ -92,7 +95,3 @@ class Product(Base):
 @event.listens_for(Setting.__table__, 'after_create')
 def receive_after_create(target, connection, **kw):
     connection.execute(target.insert(), INITIAL_DATA[str(target)])
-
-
-if __name__ == '__main__':
-    Base.metadata.create_all(engine)

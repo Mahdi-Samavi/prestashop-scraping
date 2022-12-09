@@ -38,10 +38,10 @@ class Crawler(Process):
 
     def init_browser(self):
         options = webdriver.ChromeOptions()
-        # options.add_argument('--headless')
+        options.add_argument('--headless')
         options.add_argument('--mute-audio')
         options.add_argument('--no-sandbox')
-        # options.add_argument('--disable-gpu')
+        options.add_argument('--disable-gpu')
         options.add_argument('--log-level=OFF')
         options.add_argument('--disable-extensions')
         options.add_argument('--window-size=1920x1080')

@@ -1,13 +1,15 @@
 import json
 import logging
+from os import path, environ
 from datetime import date
 
 
 class LogController:
     def __init__(self) -> None:
         self.logger = logging.getLogger()
-        # self.logger.setLevel(logging.INFO)
-        self.filename = 'logs/' + str(date.today()) + '.log'
+        self.filename = path.join(
+            environ['APPDATA'], 'prestashop-scraping', 'Logs', f'{str(date.today())}.log')
+
         logging.basicConfig(filename=self.filename,
                             format='%(asctime)s - %(levelname)s - %(message)s',
                             datefmt='%Y-%m-%d %H:%M:%S',

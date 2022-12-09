@@ -1,19 +1,12 @@
 <script>
+    const { pyshell } = require(".")
     const { ipcRenderer } = require("electron");
-    const { PythonShell } = require("python-shell");
-    const path = require("path");
-
-    const pyshell = (action, args) => {
-        return new PythonShell(path.join(__dirname, "../index.py"), {
-            args: [action].concat(JSON.stringify(args))
-        });
-    };
 
     ipcRenderer.on("get", (event, args) => {
         let shell = pyshell("LogController@get", args);
 
-        shell.on("message", (result) => {
-            event.sender.send("log:get", JSON.parse(result));
+        shell.stdout.on("data", (data) => {
+            event.sender.send("log:get", JSON.parse(data));
         });
     });
 </script>
