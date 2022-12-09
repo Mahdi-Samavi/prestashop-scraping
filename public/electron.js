@@ -9,6 +9,8 @@ function createWindow() {
   const mainWindow = new BrowserWindow({
     width: 1040,
     height: 800,
+    minWidth: 720,
+    minHeight: 550,
     frame: false,
     transparent: true,
     icon: path.join(__dirname, "favicon.ico"),
