@@ -148,7 +148,7 @@ class Crawler(Process):
 
         # Open editing product page
         product_url = self.driver.find_element(
-            By.CSS_SELECTOR, 'a.product-edit').get_attribute('href')
+            By.LINK_TEXT, self.product.name).get_attribute('href')
         self._new_tab('product:edit')
         self.driver.get(product_url)
 
