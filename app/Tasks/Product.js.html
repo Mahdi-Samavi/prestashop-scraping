@@ -1,0 +1,52 @@
+<script>
+    const { pyshell } = require(".")
+    const { ipcRenderer } = require("electron");
+
+    ipcRenderer.on("index", (event, args) => {
+        let shell = pyshell("ProductController@index", args);
+
+        shell.stdout.on("data", (data) => {
+            event.sender.send("product:index", JSON.parse(data));
+        });
+    });
+
+    ipcRenderer.on("create", (event, args) => {
+        let shell = pyshell("ProductController@create", args);
+
+        shell.stdout.on("data", (data) => {
+            event.sender.send("product:create", JSON.parse(data));
+        });
+    });
+
+    ipcRenderer.on("add", (event, args) => {
+        let shell = pyshell("ProductController@add", args);
+
+        shell.stdout.on("data", (data) => {
+            event.sender.send("product:add", JSON.parse(data));
+        });
+    });
+
+    ipcRenderer.on("get", (event, args) => {
+        let shell = pyshell("ProductController@get", args);
+
+        shell.stdout.on("data", (data) => {
+            event.sender.send("product:get", JSON.parse(data));
+        });
+    });
+
+    ipcRenderer.on("edit", (event, args) => {
+        let shell = pyshell("ProductController@edit", args);
+
+        shell.stdout.on("data", (data) => {
+            event.sender.send("product:edit", JSON.parse(data));
+        });
+    });
+
+    ipcRenderer.on("destroy", (event, args) => {
+        let shell = pyshell("ProductController@destroy", args);
+
+        shell.stdout.on("data", (data) => {
+            event.sender.send("product:destroy", JSON.parse(data));
+        });
+    });
+</script>

@@ -1,0 +1,12 @@
+<script>
+    const { pyshell } = require(".")
+    const { ipcRenderer } = require("electron");
+
+    ipcRenderer.on("get", (event, args) => {
+        let shell = pyshell("LogController@get", args);
+
+        shell.stdout.on("data", (data) => {
+            event.sender.send("log:get", JSON.parse(data));
+        });
+    });
+</script>

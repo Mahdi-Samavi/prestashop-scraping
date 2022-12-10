@@ -1,0 +1,28 @@
+<script>
+    const { pyshell } = require(".");
+    const { ipcRenderer } = require("electron");
+
+    ipcRenderer.on("getter", (event, args) => {
+        let shell = pyshell("SettingController@getter", args);
+
+        shell.stdout.on("data", (data) => {
+            event.sender.send("setting:getter", JSON.parse(data));
+        });
+    });
+
+    ipcRenderer.on("setter", (event, args) => {
+        let shell = pyshell("SettingController@setter", args);
+
+        shell.stdout.on("data", (data) => {
+            event.sender.send("setting:setter", JSON.parse(data));
+        });
+    });
+
+    ipcRenderer.on("edit-all", (event, args) => {
+        let shell = pyshell("SettingController@editAll", args);
+
+        shell.stdout.on("data", (data) => {
+            event.sender.send("setting:edit-all", JSON.parse(data));
+        });
+    });
+</script>

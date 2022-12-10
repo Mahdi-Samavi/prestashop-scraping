@@ -1,3 +1,99 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: "Lexend";
+        src: url('../fonts/lexend/Lexend.ttf') format('truetype');
+    }
+
+    * {
+        outline: none;
+    }
+
+    ::-webkit-scrollbar {
+        @apply hidden;
+    }
+
+    html {
+        @apply font-lexend;
+        -webkit-user-select: none;
+    }
+
+    header {
+        @apply flex flex-row-reverse justify-between gap-6 bg-slate-100 border-b draggable [&>*]:non-draggable;
+    }
+
+    tbody tr:nth-child(odd) {
+        @apply bg-gray-200 bg-opacity-30
+    }
+}
+
+@layer components {
+    #root {
+        @apply flex flex-col w-screen h-screen overflow-hidden rounded-sm bg-lavender-mist;
+    }
+
+    .window-control-button {
+        @apply px-4 py-3 transition hover:bg-gray-300;
+    }
+
+    .user-nav:hover i,
+    .user-nav:focus i {
+        @apply bg-gray-300;
+    }
+
+    .btn {
+        @apply relative flex items-center px-5 py-2 overflow-hidden transition-all rounded gap-x-5 [&>*]:z-10;
+    }
+
+    .btn::after {
+        content: "";
+        @apply absolute top-0 right-0 bg-gray-300 bg-opacity-30 w-[45%] h-[200%] transition-all -rotate-[20deg] origin-top-left -mt-[5px] -ml-[5px]
+    }
+
+    .btn:hover::after {
+        @apply w-3/5
+    }
+
+    .btn .icon {
+        @apply -mr-3
+    }
+
+    .text-input, .select-input {
+        @apply block w-full p-3 text-sm text-gray-800 transition border rounded-lg shadow-sm bg-gray-50 ring-gray-300 focus:ring focus:border-gray-300;
+    }
+
+    .desc-input {
+        @apply mt-1 text-xs text-gray-400;
+    }
+
+    .checkbox-input {
+        @apply w-4 h-4 transition border rounded bg-gray-50 ring-gray-300 accent-gray-600 focus:ring focus:border-gray-300;
+    }
+
+    .divider {
+        @apply block h-px bg-[#e5e7eb] mb-6;
+    }
+}
+
+@layer utilities {
+    .draggable {
+        -webkit-app-region: drag;
+    }
+
+    .non-draggable {
+        -webkit-app-region: no-drag;
+    }
+
+    .tooltip {
+        font-size: 12px !important;
+        padding: 4px 14px !important;
+    }
+
+    .tooltip::after {
+        margin-left: unset !important;
+        transform: translateX(-50%) rotate(135deg) !important;
+    }
+}

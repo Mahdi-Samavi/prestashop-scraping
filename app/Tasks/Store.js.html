@@ -1,0 +1,44 @@
+<script>
+    const { pyshell } = require(".")
+    const { ipcRenderer } = require("electron");
+
+    ipcRenderer.on("index", (event, args) => {
+        let shell = pyshell("StoreController@index", args);
+
+        shell.stdout.on("data", (data) => {
+            event.sender.send("store:index", JSON.parse(data));
+        });
+    });
+
+    ipcRenderer.on("add", (event, args) => {
+        let shell = pyshell("StoreController@add", args);
+
+        shell.stdout.on("data", (data) => {
+            event.sender.send("store:add", JSON.parse(data));
+        });
+    });
+
+    ipcRenderer.on("get", (event, args) => {
+        let shell = pyshell("StoreController@get", args);
+
+        shell.stdout.on("data", (data) => {
+            event.sender.send("store:get", JSON.parse(data));
+        });
+    });
+
+    ipcRenderer.on("edit", (event, args) => {
+        let shell = pyshell("StoreController@edit", args);
+
+        shell.stdout.on("data", (data) => {
+            event.sender.send("store:edit", JSON.parse(data));
+        });
+    });
+
+    ipcRenderer.on("destroy", (event, args) => {
+        let shell = pyshell("StoreController@destroy", args);
+
+        shell.stdout.on("data", (data) => {
+            event.sender.send("store:destroy", JSON.parse(data));
+        });
+    });
+</script>

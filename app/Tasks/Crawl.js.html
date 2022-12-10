@@ -1,0 +1,12 @@
+<script>
+    const { pyshell } = require(".")
+    const { ipcRenderer } = require("electron");
+
+    ipcRenderer.on("handle", (event, args) => {
+        let shell = pyshell("CrawlController@handle", args);
+
+        shell.stdout.on("data", (data) => {
+            event.sender.send("crawl:handle", JSON.parse(data));
+        });
+    });
+</script>
