@@ -6,7 +6,7 @@
     "url": "https://mahdi-samavi.ir/en"
   },
   "description": "Scraping and Crawling for Prestashop",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "private": true,
   "main": "public/electron.js",
   "homepage": "./",

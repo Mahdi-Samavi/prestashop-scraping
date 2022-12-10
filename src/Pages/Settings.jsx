@@ -7,6 +7,7 @@ import {
   DescInput,
   Label,
   Select,
+  Switch,
   TextInput,
 } from "../Components";
 
@@ -85,6 +86,13 @@ export default function Settings() {
                   </option>
                 ))}
               </Select>
+            </div>
+            <div className="mb-6">
+              <Switch
+                name="invisible_browser"
+                label="Invisible browser"
+                defaultChecked={setting && setting.invisible_browser}
+              />
             </div>
             <div className="flex flex-row-reverse">
               <Button type="submit" className="bg-slate-400">

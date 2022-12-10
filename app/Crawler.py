@@ -25,7 +25,8 @@ class Crawler(Process):
     def run(self):
         self.log = LogController()
         self.session = Session(engine)
-        delay_check = SettingController().getter('delay_check', False)
+        self.setting = SettingController()
+        delay_check = self.setting.getter('delay_check', False)
 
         while True:
             try:
@@ -38,21 +39,24 @@ class Crawler(Process):
 
     def init_browser(self):
         options = webdriver.ChromeOptions()
-        options.add_argument('--headless')
         options.add_argument('--mute-audio')
         options.add_argument('--no-sandbox')
-        options.add_argument('--disable-gpu')
         options.add_argument('--log-level=OFF')
         options.add_argument('--disable-extensions')
         options.add_argument('--window-size=1920x1080')
         options.add_argument('--disable-dev-shm-usage')
-
         options.add_argument('disable-infobars')
+
+        if self.setting.getter('invisible_browser', False) == '1':
+            options.add_argument('--headless')
+            options.add_argument('--disable-gpu')
 
         self.driver = webdriver.Chrome(
             options=options, service=ChromeService(ChromeDriverManager().install()))
 
-        SettingController().setter('crawler', self.driver.service.process.pid)
+        self.driver.maximize_window()
+
+        self.setting.setter('crawler', self.driver.service.process.pid)
 
     def crawl(self):
         self.init_browser()
@@ -148,7 +152,7 @@ class Crawler(Process):
 
         # Open editing product page
         product_url = self.driver.find_element(
-            By.CSS_SELECTOR, 'a.product-edit').get_attribute('href')
+            By.LINK_TEXT, self.product.name).get_attribute('href')
         self._new_tab('product:edit')
         self.driver.get(product_url)
 
