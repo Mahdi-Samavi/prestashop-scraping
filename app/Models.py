@@ -11,7 +11,8 @@ INITIAL_DATA = {
         {'name': 'crawling', 'value': False},
         {'name': 'delay_check', 'value': '10'},
         {'name': 'crawling_day', 'value': '1'},
-        {'name': 'crawling_time', 'value': '1'}
+        {'name': 'crawling_time', 'value': '1'},
+        {'name': 'invisible_browser', 'value': True},
     ],
 }
 

@@ -22,6 +22,8 @@ class SettingController(Controller):
         self.log.info(f'The value of {name} changed to {value}.')
 
     def editAll(self, settings):
+        settings['invisible_browser'] = 'invisible_browser' in settings
+
         for name, value in settings.items():
             self.session.query(Setting).filter_by(
                 name=name).update({'value': value})
